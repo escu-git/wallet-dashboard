@@ -6,6 +6,7 @@ import { WalletService } from './wallet/wallet.service';
 import { ConfigModule } from "@nestjs/config";
 import { WalletSchema } from './models/wallet.model';
 import { HttpModule } from '@nestjs/axios';
+import { FavoritesModule } from './favorites/favorites.module';
 ConfigModule.forRoot();
 const user = process.env.MONGO_USER;
 const password = process.env.MONGO_SECRET;
@@ -16,9 +17,10 @@ const password = process.env.MONGO_SECRET;
     MongooseModule.forFeature([{name:'wallet',schema:WalletSchema}]),
     HttpModule,
     WalletModule,
+    FavoritesModule,
   ],
   controllers:[
-    WalletController
+    WalletController,
   ],
   providers:[
     WalletService

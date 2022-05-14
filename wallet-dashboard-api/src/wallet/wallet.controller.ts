@@ -9,7 +9,7 @@ ConfigModule.forRoot();
 export class WalletController{
     constructor(private walletService : WalletService){}
 
-    @Get()
+    @Get('get-wallet')
     wallet(@Query() query:any){
         try{
             const walletId = query.wallet;
@@ -20,18 +20,4 @@ export class WalletController{
             throw err
         }
     }
-
-    //Saving wallets into favorites:
-    @Post('save-wallet')
-    saveToFavs(@Body() walletDto:Wallet){
-        return this.walletService.saveWallet(walletDto)
-    }
-
-    //Getting saved favorites wallets:
-    @Get('favorites')
-    favWallets(){
-        console.log('entro')
-        return this.walletService.readSavedWallets()
-    }
-
 }
