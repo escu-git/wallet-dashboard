@@ -4,13 +4,15 @@ import { WalletController } from './wallet/wallet.controller';
 import { WalletModule } from './wallet/wallet.module';
 import { WalletService } from './wallet/wallet.service';
 import { ConfigModule } from "@nestjs/config";
+import { WalletSchema } from './models/wallet.model';
 ConfigModule.forRoot();
 const user = process.env.MONGO_USER;
 const password = process.env.MONGO_SECRET;
 
 @Module({
   imports: [
-    MongooseModule.forRoot(`mongodb+srv://${user}:${password}@cluster0.zu7ov.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
+    MongooseModule.forRoot(`mongodb+srv://${user}:${password}@walletdashboard.zu7ov.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
+    MongooseModule.forFeature([{name:'wallet',schema:WalletSchema}]),
     WalletModule,
   ],
   controllers:[
