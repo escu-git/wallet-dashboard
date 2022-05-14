@@ -1,20 +1,39 @@
-import { TextField, Grid} from '@mui/material'
+import { TextField, Grid, Button, Chip} from '@mui/material'
 import { flexbox } from '@mui/system'
 import React from 'react'
 
-function SearchBar() {
+function SearchBar({setWalletId, walletId, searchHandler}) {
+  const typedTextHandler = (value) =>{
+
+    setWalletId(value)
+  }
+  const submitHandler = () =>{
+      if(walletId !== ""){
+        setWalletId("")
+        searchHandler()
+      }
+      return
+  }
   return (
       <Grid
-      item container lg={10}
-      style={{display:'flex', justifyContent:'center', margin:'auto'}}
+        item 
+        container 
+        lg={10}
+        style={{
+          display:'flex', 
+          flexDirection:'row',
+          justifyContent:'center',
+          margin:'auto'
+        }}
       >
-    <TextField
-        
-          id="outlined-disabled"
-          label="Let's check that wallet!"
-          placeholder='Wallet ID'
-          fullWidth
+        <TextField
+              label=""
+              placeholder='Wallet ID'
+              fullWidth
+              value={walletId? walletId : ""}
+              onChange={(e)=>{typedTextHandler(e.target.value)}}
         />
+        <Button onClick={submitHandler}>Search</Button>
       </Grid>
   )
 }
