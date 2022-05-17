@@ -7,6 +7,9 @@ import { ConfigModule } from "@nestjs/config";
 import { WalletSchema } from './models/wallet.model';
 import { HttpModule } from '@nestjs/axios';
 import { FavoritesModule } from './favorites/favorites.module';
+import { FavoriteWalletSchema } from './models/favorites.model';
+import { FavoritesController } from './favorites/favorites.controller';
+import { FavoritesService } from './favorites/favorites.service';
 ConfigModule.forRoot();
 const user = process.env.MONGO_USER;
 const password = process.env.MONGO_SECRET;
@@ -15,15 +18,18 @@ const password = process.env.MONGO_SECRET;
   imports: [
     MongooseModule.forRoot(`mongodb+srv://${user}:${password}@walletdashboard.zu7ov.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
     MongooseModule.forFeature([{name:'wallet',schema:WalletSchema}]),
+    MongooseModule.forFeature([{name:'favorite',schema:FavoriteWalletSchema}]),
     HttpModule,
     WalletModule,
     FavoritesModule,
   ],
   controllers:[
     WalletController,
+    FavoritesController
   ],
   providers:[
-    WalletService
+    WalletService,
+    FavoritesService
   ]
 })
 export class AppModule {}

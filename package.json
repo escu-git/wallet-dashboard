@@ -1,0 +1,11 @@
+{
+  "name": "wallet-dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "client":"cd wallet-dashboard-ui && npm run dev",
+    "server":"cd wallet-dashboard-api && npm run start:dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
+  
+}

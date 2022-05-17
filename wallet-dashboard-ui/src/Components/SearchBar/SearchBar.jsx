@@ -1,5 +1,4 @@
-import { TextField, Grid, Button, Chip} from '@mui/material'
-import { flexbox } from '@mui/system'
+import { TextField, Grid, Button} from '@mui/material'
 import React from 'react'
 
 function SearchBar({setWalletId, walletId, searchHandler}) {
@@ -10,7 +9,7 @@ function SearchBar({setWalletId, walletId, searchHandler}) {
   const submitHandler = () =>{
       if(walletId !== ""){
         setWalletId("")
-        searchHandler()
+        searchHandler(walletId)
       }
       return
   }

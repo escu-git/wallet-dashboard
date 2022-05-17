@@ -9,11 +9,12 @@ ConfigModule.forRoot();
 export class WalletController{
     constructor(private walletService : WalletService){}
 
-    @Get('get-wallet')
-    wallet(@Query() query:any){
+    @Get('/')
+     wallet(@Query() query:any){
         try{
             const walletId = query.wallet;
-            const data:any = this.walletService.getWalletFromApi(walletId)
+            const data:any =  this.walletService.getWalletFromApi(walletId)
+            console.log(data)
             return data
         }
         catch(err){
