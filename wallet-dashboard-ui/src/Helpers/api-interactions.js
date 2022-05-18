@@ -21,6 +21,7 @@ export const addFavorite = async(wallet, descr)=>{
 }
 
 export const removeFavorite = async(wallet)=>{
-    const response = await axios.delete(`http://localhost:5000/favorites/remove/${wallet.walletId}`)
+    console.log(wallet)
+    const response = await axios.delete(`http://localhost:5000/favorites/remove/?wallet=${wallet}`)
     return response
 }

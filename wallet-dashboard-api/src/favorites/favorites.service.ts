@@ -38,7 +38,7 @@ export class FavoritesService{
     
     async deleteFavWallet(favoriteWalletId){
         try{
-            const response = await this.favoriteModel.deleteOne(favoriteWalletId)
+            const response = await this.favoriteModel.deleteOne({walletId:favoriteWalletId})
             return response
             
         }  

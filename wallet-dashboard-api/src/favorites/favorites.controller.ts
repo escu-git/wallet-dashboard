@@ -23,11 +23,11 @@ export class FavoritesController{
         return this.favoritesService.saveFavWallet(favoriteDto)
     }
 
-    @Delete('remove/:id')
-    deleteFromFav(@Query() query:any){
+    @Delete('remove/')
+    deleteFromFav(@Query() query:any){  
         try{
-            const id = query.id;
-            return this.favoritesService.deleteFavWallet(id)
+            const wallet = query.wallet
+            return this.favoritesService.deleteFavWallet(wallet)
         }catch(err){
             throw err
         }
