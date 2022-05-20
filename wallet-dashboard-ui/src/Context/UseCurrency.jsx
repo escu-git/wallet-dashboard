@@ -17,12 +17,12 @@ export const CurrencyProvider = ({children})=>{
 
     useEffect(()=>{
         const getDollar = async()=>{
-          const data = await axios.get(`http://localhost:5000/currency/dollar`)
+          const data = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/currency/dollar`)
           return data
           
         }
         const getEuro = async()=>{
-          const data = await axios.get(`http://localhost:5000/currency/euro`)
+          const data = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/currency/euro`)
           return data
         }
         getDollar().then(res=>setDollar(res.data.result.ethusd))

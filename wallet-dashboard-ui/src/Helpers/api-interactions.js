@@ -2,18 +2,18 @@ import * as axios from 'axios'
 
 //
 export const getWallet = async(id) =>{
-const response = await axios.get(`http://localhost:5000/wallet/?wallet=${id}`)
+const response = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/wallet/?wallet=${id}`)
 return response
 }
 
 export const isOld = async(id)=>{
-    const response = await axios.get(`http://localhost:5000/wallet/isOld/?wallet=${id}`)
+    const response = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/wallet/isOld/?wallet=${id}`)
     return response
 }
 
 export const addFavorite = async(wallet, descr)=>{
     try{
-        const response = await axios.post(`http://localhost:5000/favorites/add`, 
+        const response = await axios.post(`${import.meta.env.VITE_API_DOMAIN}/favorites/add`, 
         {
             ...wallet,
             description:descr
@@ -27,6 +27,6 @@ export const addFavorite = async(wallet, descr)=>{
 
 export const removeFavorite = async(wallet)=>{
     console.log(wallet)
-    const response = await axios.delete(`http://localhost:5000/favorites/remove/?wallet=${wallet}`)
+    const response = await axios.delete(`${import.meta.env.VITE_API_DOMAIN}/favorites/remove/?wallet=${wallet}`)
     return response
 }

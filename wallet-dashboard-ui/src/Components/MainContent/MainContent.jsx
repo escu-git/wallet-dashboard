@@ -39,7 +39,7 @@ function MainContent() {
   const getFavoriteWallets = async()=>{
     try{
       setLoadingFavs(true);
-      const data = await axios.get("http://localhost:5000/favorites/")
+      const data = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/favorites/`)
       const favorites = data.data.map(async(wallet)=>{
         const res = await getWallet(wallet.walletId);
         return{

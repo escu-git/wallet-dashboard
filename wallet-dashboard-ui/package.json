@@ -1,7 +1,7 @@
 {
   "name": "wallet-dashboard-ui",
   "private": true,
-  "proxy": "https://wallet-dashboard-escu.herokuapp.com/",
+  "proxy": "https://wallet-dashboard-escu.herokuapp.com",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
