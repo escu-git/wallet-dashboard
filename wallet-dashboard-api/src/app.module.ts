@@ -10,6 +10,10 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { FavoriteWalletSchema } from './models/favorites.model';
 import { FavoritesController } from './favorites/favorites.controller';
 import { FavoritesService } from './favorites/favorites.service';
+import { CurrencyModule } from './currency/currency.module';
+import { CurrencyController } from './currency/currency.controller';
+import { CurrencyService } from './currency/currency.service';
+import { CurrencySchema } from './models/currency.model';
 ConfigModule.forRoot();
 const user = process.env.MONGO_USER;
 const password = process.env.MONGO_SECRET;
@@ -19,17 +23,21 @@ const password = process.env.MONGO_SECRET;
     MongooseModule.forRoot(`mongodb+srv://${user}:${password}@walletdashboard.zu7ov.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
     MongooseModule.forFeature([{name:'wallet',schema:WalletSchema}]),
     MongooseModule.forFeature([{name:'favorite',schema:FavoriteWalletSchema}]),
+    MongooseModule.forFeature([{name:'currency', schema:CurrencySchema}]),
     HttpModule,
     WalletModule,
     FavoritesModule,
+    CurrencyModule,
   ],
   controllers:[
     WalletController,
-    FavoritesController
+    FavoritesController,
+    CurrencyController,
   ],
   providers:[
     WalletService,
-    FavoritesService
+    FavoritesService,
+    CurrencyService,
   ]
 })
 export class AppModule {}

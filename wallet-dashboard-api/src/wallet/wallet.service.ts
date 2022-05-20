@@ -6,6 +6,7 @@ import { ConfigModule } from "@nestjs/config";
 import { HttpService } from "@nestjs/axios";
 import { map } from "rxjs";
 import { FavoriteDocument } from "src/models/favorites.model";
+var Web3 = require('web3');
 ConfigModule.forRoot();
 
 @Injectable({})
@@ -26,18 +27,32 @@ export class WalletService{
                     const response = fav.length ==0? false:true;
                     return response
                 }
-                const eth = response.data.result;
+                const wei =  response.data.result;
+                const fromWei= Web3.utils.fromWei(wei, 'ether')
                 return {
                 walletId,
-                eth,
+                eth:fromWei,
                 status:response.data.status,
                 message:response.data.message,
                 isFavorite: await isFavorite(),
-                isOld:false
             }})
         )
         return resolve
     }
 
-    
+    isOld(walletId:string){
+        const response:any = this.httpService.get(`https://api.etherscan.io/api?module=account&action=txlist&address=${walletId}&page=1&sort=asc&apikey=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY`)
+        .pipe(map(async(res)=>{
+            const date = res.data.result[0].timeStamp
+            const firstOperation:any = new Date(date * 1000);
+            const today:any = new Date();
+            const diffTime = Math.abs(firstOperation - today);
+            const diffDays = Math.ceil(diffTime/(1000*60*60*24))
+            if(diffDays >= 365){
+                return true
+            }
+            return false
+        }))
+        return response
+    }
 }

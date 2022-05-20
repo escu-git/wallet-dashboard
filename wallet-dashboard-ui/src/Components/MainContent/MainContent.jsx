@@ -4,15 +4,13 @@ import * as axios from 'axios'
 import { Grid } from '@mui/material';
 import WalletCard from '../Cards/WalletCard';
 import FavoriteWallets from '../Favorites/FavoriteWallets';
-import { getWallet } from '../../Helpers/api-interactions';
+import { getWallet, isOld } from '../../Helpers/api-interactions';
 import Loading from '../Loading/Loading';
-import CurrencySwitch from '../Currency/CurrencySwitch';
 
 function MainContent() {
   const[walletId, setWalletId]=useState(false);
   const[wallet, setWallet]=useState(false);
   const[favoriteList, setFavoriteList]=useState([]);
-  const[currency, setCurrency]=useState('Dollar');
   const[error, setError]=useState(false);
   const[updatedFavorites, setUpdatedFavorites]=useState(false);
   const[isLoading, setIsLoading]=useState(false);
@@ -22,12 +20,13 @@ function MainContent() {
     try{
       setIsLoading(true)
       const response = await getWallet(walletId)
-      console.log(response.data.status)
       if(response.data.status ==0){
         setError(true)
       }else{
+        const setIsOld = await isOld(walletId);
+        const result = {...response.data, setIsOld:setIsOld.data}
         setError(false)
-        setWallet(response.data)
+        setWallet(result)
       }
       setWalletId(false)
       setIsLoading(false)
@@ -36,6 +35,7 @@ function MainContent() {
     }
   }
 
+  
   const getFavoriteWallets = async()=>{
     try{
       setLoadingFavs(true);
@@ -60,9 +60,10 @@ function MainContent() {
     getFavoriteWallets()
   },[updatedFavorites])
 
+  console.log(wallet)
   return (
-    <Grid item style={{display:'flex', flexDirection:'column',justifyContent:'center'}}>
-    <CurrencySwitch setCurrency={setCurrency} currency={currency}/>
+    <Grid item style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+   
       <SearchBar
         setWalletId={setWalletId}
         walletId={walletId}
@@ -76,6 +77,7 @@ function MainContent() {
             wallet || error?
             <WalletCard 
               wallet={wallet}
+              setWallet={setWallet}
               updatedFavorites={updatedFavorites}
               setUpdatedFavorites={setUpdatedFavorites}
               error={error}
@@ -93,11 +95,8 @@ function MainContent() {
         getFavoriteWallets={getFavoriteWallets}
         updatedFavorites={updatedFavorites} 
         setUpdatedFavorites={setUpdatedFavorites}
-        currency={currency}
-        setCurrency={setCurrency}
         loadingFavs={loadingFavs}
         />
-        
       </Grid>
     </Grid>
   )

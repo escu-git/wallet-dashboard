@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { InputSwitch } from 'primereact/inputswitch';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import { useCurrency } from '../../Context/UseCurrency';
 
-const CurrencySwitch = ({setCurrency, currency}) => {
-  const dollar = 'Dollar';
-  const euro = 'Euro'
+const CurrencySwitch = ({}) => {
+    const currencyContext = useCurrency()
+    const dollar = 'Dollar';
+    const euro = 'Euro'
 
-  const switchHandler = (e) =>{
-      setCurrency(e.value)
-  }
+    const switchHandler = (e) =>{
+        currencyContext.setCurrency(e.value)
+    }
+    
   return (
-      <div>
-          <div className="card">
-              <Typography>{currency}</Typography>
-              <InputSwitch checked={currency}  trueValue={dollar} falseValue={euro} name='Currency' tooltip={`Change currency`} onChange={(e) => switchHandler(e)} />
-          </div>
-      </div>
+      <Grid style={{position:'absolute', top:25, right:"10em"}}>
+          <Fragment>
+              <Typography>{currencyContext.currency}</Typography>
+              <InputSwitch style={{}} checked={currencyContext.currency}  trueValue={dollar} falseValue={euro} name='Currency' tooltip={`Change currency`} onChange={(e) => switchHandler(e)} />
+          </Fragment>
+      </Grid>
   );
 }
 

@@ -3,8 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "install-ui":"cd wallet-dashboard-ui && npm install",
+    "install-api":"cd wallet-dashboard-api && npm install",
     "client": "cd wallet-dashboard-ui && npm run dev",
     "server": "cd wallet-dashboard-api && npm run start:dev",
+    "install-dependencies":"concurrently \"npm run install-ui\" \"npm run install-api\"",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {

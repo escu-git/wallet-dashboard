@@ -6,6 +6,11 @@ const response = await axios.get(`http://localhost:5000/wallet/?wallet=${id}`)
 return response
 }
 
+export const isOld = async(id)=>{
+    const response = await axios.get(`http://localhost:5000/wallet/isOld/?wallet=${id}`)
+    return response
+}
+
 export const addFavorite = async(wallet, descr)=>{
     try{
         const response = await axios.post(`http://localhost:5000/favorites/add`, 

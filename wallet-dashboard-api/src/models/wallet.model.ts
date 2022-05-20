@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
 export type WalletDocument = Wallet & Document
+
 @Schema({})
 
 export class Wallet{
@@ -21,7 +22,7 @@ export class Wallet{
     isFavorite:boolean;
 
     @Prop()
-    isOld:boolean;
+    isOld: boolean
 }
 
 export const WalletSchema = SchemaFactory.createForClass(Wallet);

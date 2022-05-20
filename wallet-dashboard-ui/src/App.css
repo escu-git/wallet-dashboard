@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -39,4 +43,9 @@
 
 button {
   font-size: calc(10px + 2vmin);
+}
+
+
+h1{
+  font-family: 'Syne Mono', monospace;
 }

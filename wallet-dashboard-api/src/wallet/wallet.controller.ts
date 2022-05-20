@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query} from "@nestjs/common";
+import { Controller, Get,Query} from "@nestjs/common";
 import { WalletService } from "./wallet.service";
 import { ConfigModule } from "@nestjs/config";
-import { Wallet } from "src/models/wallet.model";
 ConfigModule.forRoot();
 
 @Controller('wallet')
@@ -14,11 +13,21 @@ export class WalletController{
         try{
             const walletId = query.wallet;
             const data:any =  this.walletService.getWalletFromApi(walletId)
-            console.log(data)
             return data
         }
         catch(err){
             throw err
         }
     }
+    @Get('/isOld')
+        isOld(@Query() query:any){
+            try{
+                const walletId = query.wallet;
+                const data:any =  this.walletService.isOld(walletId)
+                console.log(data)
+                return data
+            }catch(err){
+                throw err
+            }
+        }
 }
