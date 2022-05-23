@@ -25,7 +25,6 @@ export class FavoritesService{
     async saveFavWallet(favoriteData : FavoriteWallet):Promise<FavoriteWallet>{
         try{
             const exists = await this.favoriteModel.find({walletId:favoriteData.walletId})
-            console.log(exists)
             if(exists.length ===0){
                 const newFavorite = new this.favoriteModel(favoriteData);
                 return newFavorite.save();

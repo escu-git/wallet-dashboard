@@ -4,10 +4,14 @@ import * as axios from 'axios'
 import { Grid, Drawer } from '@mui/material';
 import WalletCard from '../Cards/WalletCard';
 import FavoriteWallets from '../Favorites/FavoriteWallets';
-import { getWallet, isOld } from '../../Helpers/api-interactions';
+import { getWallet, isOldWallet } from '../../Helpers/api-interactions';
 import Loading from '../Loading/Loading';
+import { useMediaQuery, useTheme } from '@mui/material';
+import CurrencySwitch from '../Currency/CurrencySwitch';
 
 function MainContent() {
+  const theme = useTheme()
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const[walletId, setWalletId]=useState(false);
   const[wallet, setWallet]=useState(false);
   const[favoriteList, setFavoriteList]=useState([]);
@@ -20,9 +24,8 @@ function MainContent() {
     try{
       setIsLoading(true)
       const response = await getWallet(walletId)
-     
-        const setIsOld = await isOld(walletId);
-        const result = {...response.data, setIsOld:setIsOld.data}
+        const isOld = await isOldWallet(walletId);
+        const result = {...response.data, isOld:isOld.data}
         setError(false)
         setWallet(result)
         setWalletId(false)
@@ -34,13 +37,15 @@ function MainContent() {
     }
   }
 
-  
   const getFavoriteWallets = async()=>{
     try{
       setLoadingFavs(true);
       const data = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/favorites/`)
+      console.log(data)
       const favorites = data.data.map(async(wallet)=>{
+
         const res = await getWallet(wallet.walletId);
+        console.log(res)
         return{
           ...wallet, 
           eth:res.data.eth,
@@ -58,10 +63,9 @@ function MainContent() {
   useEffect(()=>{
     getFavoriteWallets()
   },[updatedFavorites])
-
   return (
-    <Grid item style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
-   
+    <Grid item style={{display:'flex', flexDirection:'column',justifyContent:'space-between', position:smallScreen?'relative':'block'}}>
+    {smallScreen && <CurrencySwitch/>}
       <SearchBar
         setWalletId={setWalletId}
         walletId={walletId}

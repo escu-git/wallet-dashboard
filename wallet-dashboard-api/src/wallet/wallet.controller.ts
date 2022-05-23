@@ -24,7 +24,6 @@ export class WalletController{
             try{
                 const walletId = query.wallet;
                 const data:any =  this.walletService.isOld(walletId)
-                console.log(data)
                 return data
             }catch(err){
                 throw err

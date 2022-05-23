@@ -5,13 +5,14 @@ import FavoriteIcon from '../commons/FavoriteIcon'
 import { useCurrency } from '../../Context/UseCurrency';
 import AddModal from '../Modal/AddModal';
 import Close from '../commons/Close';
+import Nowallet from '../404/NoWallet';
 
 function WalletCard({wallet, setWallet, setUpdatedFavorites, updatedFavorites, error}) {
   const[openModal, setOpenModal]=useState(false); 
   const[walletDescription, setWalletDescription]=useState("")
   const icon = wallet.isFavorite? null : "fa-solid fa-heart-circle-plus";
   const currencyContext = useCurrency()
-
+  // console.log(wallet)
   const addWallet = async() =>{
       await addFavorite(wallet, walletDescription)
       .then(()=>{
@@ -20,7 +21,6 @@ function WalletCard({wallet, setWallet, setUpdatedFavorites, updatedFavorites, e
         setOpenModal(false)
       })
   }
-
   return (
     <Grid item container lg={12} style={{
       display:'flex', 
@@ -28,14 +28,14 @@ function WalletCard({wallet, setWallet, setUpdatedFavorites, updatedFavorites, e
       alignItems:'center',
       marginTop:50
       }}>
-      {error? <Typography>The wallet doesn't exist</Typography>
+      {error? <Nowallet/>
       :
       <Fragment>
         <Card sx={{ 
         minWidth: 275, 
         minHeight:300, 
         borderRadius:5,
-        padding:"3px 5px",
+        padding:"15px 5px",
         border:10,
         borderColor:'#3b5998',
         position:'relative'}}>
@@ -47,23 +47,24 @@ function WalletCard({wallet, setWallet, setUpdatedFavorites, updatedFavorites, e
             <Grid>
                 <FavoriteIcon manageFavorite={()=>{setOpenModal(true)}} icon={icon} onClick={()=>setOpenModal(true)}/>
                 <Close setWallet={setWallet}/>
-                <Typography variant="h2" color="#3b5998" fontSize={24}>WALLET:</Typography>
+                <Typography variant="h2" color="primary" fontWeight='bold' fontSize={24}>WALLET:</Typography>
                 <Typography variant="h3" color="secondary" fontSize={20}> {wallet.walletId}</Typography>
+                <Typography variant="h3" color="primary" fontSize={20} margin='5px auto'>
+                  {wallet.isOld?'Old':'New'} wallet
+                </Typography>
             <Divider/>
             </Grid>
             <Grid>
-                <Typography color='primary' fontSize={24}>ETH:</Typography>
+                <Typography color='primary' fontSize={24}>ETH</Typography>
                 <Typography variant="h3" color="secondary" fontSize={20}>
                   {wallet.eth}
                 </Typography>
+                <Divider/>
                 <Typography color='primary' fontSize={24}>{currencyContext.currency}</Typography>
                 <Typography variant="h3" color="secondary" fontSize={20}>
                   {currencyContext.exchangeValue(wallet.eth)}
                 </Typography>
-                <Typography color='primary' fontSize={24}>Old wallet?</Typography>
-                <Typography variant="h3" color="secondary" fontSize={20}>
-                  {wallet.setIsOld?'Old':'New'}
-                </Typography>
+                <Divider/>
             </Grid>
           </CardContent>
         </Card>

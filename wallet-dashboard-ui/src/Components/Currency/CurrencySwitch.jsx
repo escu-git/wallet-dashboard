@@ -18,7 +18,7 @@ const CurrencySwitch = ({}) => {
     
   return (
       <Grid  style={{
-          position:!smallScreen && 'absolute', top:50, right:'10em'}}>
+          position:'absolute', top:smallScreen?-40:50, right:smallScreen?'1em':'3em'}}>
           <Fragment>
               <Typography>{currencyContext.currency}</Typography>
               <InputSwitch
@@ -26,7 +26,7 @@ const CurrencySwitch = ({}) => {
               trueValue={dollar} 
               falseValue={euro}
               style={{}}
-              name='Currency' tooltip={`Change currency`} 
+              name='Currency'
               onChange={(e) => switchHandler(e)} />
           </Fragment>
       </Grid>

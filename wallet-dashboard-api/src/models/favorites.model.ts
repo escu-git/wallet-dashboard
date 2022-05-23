@@ -12,7 +12,7 @@ export class FavoriteWallet{
     description:string;
     
     @Prop()
-    date:Date;
+    isOld:boolean;
 }
 
 export const FavoriteWalletSchema = SchemaFactory.createForClass(FavoriteWallet);

@@ -41,18 +41,22 @@ export class WalletService{
     }
 
     isOld(walletId:string){
-        const response:any = this.httpService.get(`https://api.etherscan.io/api?module=account&action=txlist&address=${walletId}&page=1&sort=asc&apikey=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY`)
-        .pipe(map(async(res)=>{
-            const date = res.data.result[0].timeStamp
-            const firstOperation:any = new Date(date * 1000);
-            const today:any = new Date();
-            const diffTime = Math.abs(firstOperation - today);
-            const diffDays = Math.ceil(diffTime/(1000*60*60*24))
-            if(diffDays >= 365){
-                return true
-            }
-            return false
-        }))
-        return response
+        try{
+            const response:any = this.httpService.get(`https://api.etherscan.io/api?module=account&action=txlist&address=${walletId}&page=1&sort=asc&apikey=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY`)
+            .pipe(map(async(res)=>{
+                const date = res.data.result[0].timeStamp
+                const firstOperation:any = new Date(date * 1000);
+                const today:any = new Date();
+                const diffTime = Math.abs(firstOperation - today);
+                const diffDays = Math.ceil(diffTime/(1000*60*60*24))
+                if(diffDays >= 365){
+                    return true
+                }
+                return false
+            }))
+            return response
+        }catch(err){
+            throw err
+        }
     }
 }

@@ -6,7 +6,7 @@ const response = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/wallet/?wal
 return response
 }
 
-export const isOld = async(id)=>{
+export const isOldWallet = async(id)=>{
     const response = await axios.get(`${import.meta.env.VITE_API_DOMAIN}/wallet/isOld/?wallet=${id}`)
     return response
 }
