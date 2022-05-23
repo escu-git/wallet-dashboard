@@ -9,7 +9,7 @@ import Close from '../commons/Close';
 function WalletCard({wallet, setWallet, setUpdatedFavorites, updatedFavorites, error}) {
   const[openModal, setOpenModal]=useState(false); 
   const[walletDescription, setWalletDescription]=useState("")
-  const icon = wallet.isFavorite? null : "fa-solid fa-star";
+  const icon = wallet.isFavorite? null : "fa-solid fa-heart-circle-plus";
   const currencyContext = useCurrency()
 
   const addWallet = async() =>{

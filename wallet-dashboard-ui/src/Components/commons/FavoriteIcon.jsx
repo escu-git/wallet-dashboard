@@ -13,11 +13,12 @@ function FavoriteIcon({manageFavorite, icon}) {
       arrow
       disableFocusListener 
       disableTouchListener
-      title="Add to favorites!"
+      title="Add to favorites"
       
     >
-        <i className={icon} style={{
-          color:{color}, 
+        <i className={icon} 
+        style={{
+          color:'#FA0000', 
           fontSize:30,
           cursor:'pointer'
           }}

@@ -5,7 +5,7 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Tooltip, Typography } from '@mui/material';
 import {removeFavorite } from '../../Helpers/api-interactions';
 import Loading from '../Loading/Loading';
 import {useCurrency} from '../../Context/UseCurrency'
@@ -29,9 +29,21 @@ function FavoriteWallets({favoriteList, updatedFavorites, setUpdatedFavorites, l
         return{
             ...fav,
             currency:currencyContext.exchangeValue(fav.eth),
-            delete:<i className="fa-solid fa-trash" 
-            style={{color:'red', fontSize:18}} 
-            onClick={()=>remove(fav.walletId)}></i>
+            delete:(<Tooltip
+                arrow
+                disableFocusListener 
+                disableTouchListener
+                title="Remove from favorites"
+              >
+              <i 
+              className="fa-solid fa-heart-circle-xmark" 
+              style={{
+                color:'#FA0000', 
+                fontSize:18,
+                cursor:'pointer'
+              }} 
+              onClick={()=>remove(fav.walletId)}></i>
+              </Tooltip>)
             }
     })
 

@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import ethIcon from '../../assets/eth.png'
 import styled from 'styled-components';
+import { Grid } from '@mui/material';
 
 function Loading() {
 
    
   return (
-    <Fragment>
+    <Grid item style={{display:'flex', justifyContent:'center'}}>
         <Spinner src={ethIcon}/>
-    </Fragment>
+    </Grid>
   )
 }
 

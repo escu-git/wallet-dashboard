@@ -5,6 +5,9 @@ function AddModal({openModal, setOpenModal, addWallet, setWalletDescription, wal
 
 
     const style = {
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -14,6 +17,7 @@ function AddModal({openModal, setOpenModal, addWallet, setWalletDescription, wal
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
+        gap:3
       };
 
   return (
@@ -24,11 +28,11 @@ function AddModal({openModal, setOpenModal, addWallet, setWalletDescription, wal
   aria-describedby="modal-modal-description"
 >
   <Box sx={style}>
-    <Typography id="modal-modal-title" variant="h6" component="h2" >
-      Add a description to this wallet
+    <Typography id="modal-modal-title" variant="h6" component="h2" textAlign='center'>
+      Set a wallet description:
     </Typography>
-    <TextField onChange={(e)=>{setWalletDescription(e.target.value)}}></TextField>
-    <Button onClick={()=>addWallet()} disabled={walletDescription == ""? true:false}>Add wallet!</Button>
+    <TextField style={{marginBottom:10}} onChange={(e)=>{setWalletDescription(e.target.value)}}></TextField>
+    <Button variant='contained' color='success' onClick={()=>addWallet()} disabled={walletDescription == ""? true:false}>Add wallet!</Button>
   </Box>
 </Modal>
   )
