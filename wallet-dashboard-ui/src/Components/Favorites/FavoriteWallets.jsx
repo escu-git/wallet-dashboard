@@ -88,7 +88,7 @@ function FavoriteWallets({favoriteList, updatedFavorites, setUpdatedFavorites, l
                 <Column field="description" header="Description" sortable style={styledColumn} ></Column>
                 <Column field="walletId" header="Wallet" sortable style={styledColumn}></Column>
                 <Column field="status" header="Status" sortable style={styledColumn} ></Column>
-                <Column field='isOld' header="Wallet age" style={styledColumn}></Column>
+                <Column field='isOld' header="Wallet age" style={styledColumn} sortable></Column>
                 <Column field="eth" header="ETH" sortable style={styledColumn}></Column>
                 <Column field="currency" header={`${currencyContext.currency}`} sortable style={styledColumn}></Column>
                 <Column field='delete' header="" style={styledColumn}></Column>
