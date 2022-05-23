@@ -22,17 +22,22 @@ function SearchBar({setWalletId, walletId, searchHandler}) {
           display:'flex', 
           flexDirection:'row',
           justifyContent:'center',
-          margin:'auto'
+          margin:'50px auto',
+          gap:10
         }}
       >
         <TextField
-              label=""
-              placeholder='Wallet ID'
-              fullWidth
+              label="Search"
+              placeholder='Insert wallet ID'
+              style={{width:'30em', textAlign:'center'}}
               value={walletId? walletId : ""}
               onChange={(e)=>{typedTextHandler(e.target.value)}}
         />
-        <Button onClick={submitHandler}>Search</Button>
+        <Button 
+        variant='contained' 
+        color='primary' 
+        disabled={!walletId} 
+        onClick={submitHandler}>Search</Button>
       </Grid>
   )
 }

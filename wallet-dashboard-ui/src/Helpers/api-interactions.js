@@ -18,15 +18,13 @@ export const addFavorite = async(wallet, descr)=>{
             ...wallet,
             description:descr
         })
-        console.log(response.status)
         // return response
     }catch(err){
-        console.log(err.status)
+        throw err
     }
 }
 
 export const removeFavorite = async(wallet)=>{
-    console.log(wallet)
     const response = await axios.delete(`${import.meta.env.VITE_API_DOMAIN}/favorites/remove/?wallet=${wallet}`)
     return response
 }

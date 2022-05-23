@@ -1,7 +1,7 @@
 import React,{Fragment, useEffect, useState} from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import * as axios from 'axios'
-import { Grid } from '@mui/material';
+import { Grid, Drawer } from '@mui/material';
 import WalletCard from '../Cards/WalletCard';
 import FavoriteWallets from '../Favorites/FavoriteWallets';
 import { getWallet, isOld } from '../../Helpers/api-interactions';
@@ -20,17 +20,16 @@ function MainContent() {
     try{
       setIsLoading(true)
       const response = await getWallet(walletId)
-      if(response.data.status ==0){
-        setError(true)
-      }else{
+     
         const setIsOld = await isOld(walletId);
         const result = {...response.data, setIsOld:setIsOld.data}
         setError(false)
         setWallet(result)
-      }
-      setWalletId(false)
-      setIsLoading(false)
+        setWalletId(false)
+        setIsLoading(false)
     }catch(err){
+      setIsLoading(false)
+      setError(true)
       throw err
     }
   }
@@ -60,7 +59,6 @@ function MainContent() {
     getFavoriteWallets()
   },[updatedFavorites])
 
-  console.log(wallet)
   return (
     <Grid item style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
    

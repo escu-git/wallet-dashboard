@@ -27,7 +27,7 @@ function AddModal({openModal, setOpenModal, addWallet, setWalletDescription, wal
     <Typography id="modal-modal-title" variant="h6" component="h2" >
       Add a description to this wallet
     </Typography>
-    <TextField autoComplete={false} onChange={(e)=>{setWalletDescription(e.target.value)}}></TextField>
+    <TextField onChange={(e)=>{setWalletDescription(e.target.value)}}></TextField>
     <Button onClick={()=>addWallet()} disabled={walletDescription == ""? true:false}>Add wallet!</Button>
   </Box>
 </Modal>
